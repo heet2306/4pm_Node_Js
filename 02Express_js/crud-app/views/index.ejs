@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Records</title>
+</head>
+<body>
+    <h1>All Records</h1>
+    <a href="/new">Create New Data</a>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        <% records.forEach(record => { %>
+            <tr>
+                <td><%= record.id %></td>
+                <td><%= record.name %></td>
+                <td><%= record.date %></td>
+                <td>
+                    <a href="/edit/<%= record.id %>">Edit</a>
+                    <a href="/delete/<%= record.id %>" onclick="return confirm('Delete this record?')">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
