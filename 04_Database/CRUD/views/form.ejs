@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+    <h1>Form</h1>
+    <form action="/insertData" method="post" enctype="multipart/form-data">
+        <table>
+            <tr><td>Name:</td><td><input type="text" name="name" value="<%= user.name || '' %>" required></td></tr>
+            <tr><td>Email:</td><td><input type="email" name="email" value="<%= user.email || '' %>" required></td></tr>
+            <tr><td>Password:</td><td><input type="password" name="password" value="<%= user.password || '' %>" required></td></tr>
+            <tr><td>Phone:</td><td><input type="number" name="phone" value="<%= user.phone || '' %>" required></td></tr>
+            <tr><td>City:</td><td><input type="text" name="city" value="<%= user.city || '' %>" required></td></tr>
+            <tr><td>Upload Image:</td><td><input type="file" name="image" accept="image/*"></td></tr>
+            <tr><td></td><td><input type="submit" value="Submit"></td></tr>
+        </table>
+    </form>
+
+    <h2>Records</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th><th>Email</th><th>Password</th><th>Phone</th><th>City</th><th>Image</th><th>Action</th>
+        </tr>
+        <% record.forEach((item) => { %>
+            <tr>
+                <td><%= item.name %></td>
+                <td><%= item.email %></td>
+                <td><%= item.password %></td>
+                <td><%= item.phone %></td>
+                <td><%= item.city %></td>
+                <td>
+                    <% if (item.image) { %>
+                        <img src="<%= item.image %>" width="100" />
+                    <% } else { %>
+                        No Img
+                    <% } %>
+                </td>
+                <td>
+                    <a href="/deleteData?id=<%= item._id %>">Delete</a> |
+                    <a href="/editData?id=<%= item._id %>">Edit</a>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

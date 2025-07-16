@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            border-collapse: collapse;
+        }
+        img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit User</h2>
+    <form action="/updateData?id=<%= user._id %>" method="POST" enctype="multipart/form-data">
+        <label>Name:</label>
+        <input type="text" name="name" value="<%= user.name %>" required><br><br>
+        
+        <label>Email:</label>
+        <input type="email" name="email" value="<%= user.email %>" required><br><br>
+        
+        <label>Password:</label>
+        <input type="password" name="password" value="<%= user.password %>" required><br><br>
+        
+        <label>Phone:</label>
+        <input type="text" name="phone" value="<%= user.phone %>" required><br><br>
+        
+        <label>City:</label>
+        <input type="text" name="city" value="<%= user.city %>" required><br><br>
+        
+        <label>Image:</label>
+        <input type="file" name="image">
+        <% if (user.image) { %>
+            <img src="<%= user.image %>" alt="User Image">
+        <% } %>
+        <br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <h2>All Users</h2>
+    <table>
+        <tr>
+            <th>Name</th><th>Email</th><th>Password</th><th>Phone</th><th>City</th><th>Image</th><th>Action</th>
+        </tr>
+        <% record.forEach((item) => { %>
+            <tr>
+                <td><%= item.name %></td>
+                <td><%= item.email %></td>
+                <td><%= item.password %></td>
+                <td><%= item.phone %></td>
+                <td><%= item.city %></td>
+                <td>
+                    <% if (item.image) { %>
+                        <img src="<%= item.image %>" alt="User Image">
+                    <% } else { %>
+                        No Image
+                    <% } %>
+                </td>
+                <td>
+                    <a href="/editData?id=<%= item._id %>">Edit</a> |
+                    <a href="/deleteData?id=<%= item._id %>" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>
